@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>نتائج الطلاب</title>
+</head>
+<body>
+
+<h2>استعلام عن النتيجة</h2>
+
+<input type="text" id="id" placeholder="أدخل رقم الهوية">
+<button onclick="search()">بحث</button>
+
+<p id="result"></p>
+
+<script>
+const students = [
+  {id: "123", name: "محمد", avg: 90},
+  {id: "456", name: "أحمد", avg: 75}
+];
+
+function search() {
+  let id = document.getElementById("id").value;
+  let student = students.find(s => s.id === id);
+
+  if(student){
+    document.getElementById("result").innerHTML =
+      "الاسم: " + student.name + "<br>المعدل: " + student.avg;
+  } else {
+    document.getElementById("result").innerHTML = "لا يوجد";
+  }
+}
+</script>
+
+</body>
+</html>
