@@ -1,35 +1,76 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar">
 <head>
-  <title>نتائج الطلاب</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نتائج الطلاب</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
 </head>
 <body>
+    <h1>نتائج الطلاب</h1>
+    <table>
+        <tr>
+            <th>اسم الطالب</th>
+            <th>العلامات</th>
+            <th>الترتيب</th>
+        </tr>
+        <!-- Student data example -->
+        <tr>
+            <td>أحمد</td>
+            <td>85</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>علي</td>
+            <td>78</td>
+            <td>2</td>
+        </tr>
+        <!-- More student rows can be added here -->
+    </table>
+    <script>
+        const students = [
+            { name: 'أحمد', marks: 85 },
+            { name: 'علي', marks: 78 }
+            // More students can be added here
+        ];
 
-<h2>استعلام عن النتيجة</h2>
+        // Calculate average marks
+        const totalMarks = students.reduce((sum, student) => sum + student.marks, 0);
+        const averageMarks = totalMarks / students.length;
 
-<input type="text" id="id" placeholder="أدخل رقم الهوية">
-<button onclick="search()">بحث</button>
+        // Ranking logic
+        students.sort((a, b) => b.marks - a.marks);
+        for (let i = 0; i < students.length; i++) {
+            students[i].rank = i + 1;
+        }
 
-<p id="result"></p>
+        // Print certificates
+        function printCertificate(student) {
+            console.log(`تلقّى ${student.name} شهادة تقدير!`);
+        }
 
-<script>
-const students = [
-  {id: "123", name: "محمد", avg: 90},
-  {id: "456", name: "أحمد", avg: 75}
-];
-
-function search() {
-  let id = document.getElementById("id").value;
-  let student = students.find(s => s.id === id);
-
-  if(student){
-    document.getElementById("result").innerHTML =
-      "الاسم: " + student.name + "<br>المعدل: " + student.avg;
-  } else {
-    document.getElementById("result").innerHTML = "لا يوجد";
-  }
-}
-</script>
-
+        console.log(`متوسط العلامات: ${averageMarks}`);
+        students.forEach(printCertificate);
+    </script>
 </body>
 </html>
